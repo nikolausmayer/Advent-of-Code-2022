@@ -5,13 +5,13 @@
 ##
 
 ## Compilers
-CXX = g++-10
+CXX ?= g++-12
 
 ## Compiler flags; extended in 'debug'/'release' rules
-CXXFLAGS += -fPIC -W -Wall -Wextra -Wpedantic -std=c++2a -O3
+CXXFLAGS += -W -Wall -Wextra -Wpedantic -std=c++23 -O3 -I../../../fmt/include -fsanitize=undefined,leak,address
 
 ## Linker flags
-LDFLAGS = 
+LDFLAGS = -L../../../fmt -lfmt -fsanitize=undefined,leak,address
 
 ## Every *.cpp file is a C++ source file
 SOURCES = $(wildcard *.cpp)
@@ -57,7 +57,12 @@ clean:
 
 ## A main executable depends on its own object file 
 ## For this rule to work, built-in recipes need to be disabled (see .SUFFIXES)
-%: %.o Makefile
+%: %.o Makefile ../../../fmt/libfmt.a
 	$(info ... linking $@ ...)
 	$(CXX) $< $(LDFLAGS) -o $@
+
+## Compile {fmt} (https://github.com/fmtlib/) because GCC 12 does not have std::format
+../../../fmt/libfmt.a:
+	test -d ../../../fmt || wget https://github.com/fmtlib/fmt/releases/download/9.1.0/fmt-9.1.0.zip; unzip fmt-9.1.0.zip; mv fmt-9.1.0 ../../../fmt; rm fmt-9.1.0.zip;
+	test -f ../../../fmt/libfmt.a || cd ../../../fmt; cmake .; make -j fmt;
 
