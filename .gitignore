@@ -13,3 +13,7 @@
 
 # Executables
 *.out
+
+# {fmt} library
+fmt
+
