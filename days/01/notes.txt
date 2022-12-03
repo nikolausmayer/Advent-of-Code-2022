@@ -1,0 +1,1 @@
+As in all AoC years, most time was spent in setting up my environment on day 1.

@@ -1,0 +1,1 @@
+A surprisingly complex task for day 3. Luckily the rucksacks are already pre-grouped into triplets -- I was already dreading the first complexity explosion of the year when I started reading part 2.
