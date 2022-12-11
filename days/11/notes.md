@@ -1,0 +1,1 @@
+So it begins -- the first day with a fundamental difficulty jump in part 2. Thankfully enough, I remembered some similar tasks from previous years (the bus schedule and... something with seeds, maybe?). (And how nice of the problem to only use prime numbers here!)
